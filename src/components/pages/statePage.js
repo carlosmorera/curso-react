@@ -1,30 +1,40 @@
 import React from 'react'
 import {Button, Segment} from "semantic-ui-react";
+import { increaseLikes, ceroLikes, decreaseLikes } from '../../actions/character'
+import {connect} from "react-redux";
 
 class StateLocal extends React.Component {
-    state = {likes: 0};
-
-    addLikke = () => {
-        this.setState({
-            likes: this.setState.likes + 1
-        })
-    };
-
+    state = {};
     render() {
-        const { likes } = this.setState;
         return (
             <Segment>
                 <h1> Local state </h1>
-                <Button onClick={this.addLikke}
+                <Button
                         color='red'
                         content='Like'
                         icon='heart'
-                        label={{basic: true, color: ' red', pointing: ' left', content: likes}}
+                        label={{basic: true, color: ' red', pointing: ' left', content: this.props.likes}}
+                        onClick={this.props.increaseLikes}
+                /> <Button
+                        color='green'
+                        content='Dislike'
+                        icon='heart'
+                        label={{basic: true, color: ' red', pointing: ' left', content: this.props.likes}}
+                        onClick={this.props.decreaseLikes}
+                /> <Button
+                        color='blue'
+                        content='Reset Likes'
+                        icon='heart'
+                        label={{basic: true, color: ' red', pointing: ' left', content: this.props.likes}}
+                        onClick={this.props.ceroLikes}
                 />
             </Segment>
         );
 
     }
 }
+const mapStateProps = (state) => ({
+    likes : state.character.likes
+});
 
-export default StateLocal;
+export default connect(mapStateProps,{increaseLikes,decreaseLikes, ceroLikes}) (StateLocal);
