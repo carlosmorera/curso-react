@@ -3,17 +3,23 @@ import ReactDOM from 'react-dom';
 import {Router, Route} from 'react-router-dom';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux'
+import createSagaMiddleware from 'redux-saga';
 import thunk from 'redux-thunk'
 import {composeWithDevTools} from "redux-devtools-extension";
 import history from './utils/history';
 import rootReducer from './rootReducer'
 import App from './App';
+import rootSaga from'./sagas'
 import * as serviceWorker from './serviceWorker';
+
+const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
     rootReducer,
-    composeWithDevTools(applyMiddleware(thunk))
+    composeWithDevTools(applyMiddleware(sagaMiddleware, thunk))
 );
+
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
     <Router history={history}>
