@@ -1,9 +1,11 @@
 import axios from 'axios';
 
+const ruta = axios.create("http://localhost:3000");
+
 export default{
  characters: {
-     fetchAll: () => axios.get("/api/character").then(res => res.data),
+     fetchAll: () => ruta.get("/api/character").then(res => res.data),
      create: character =>
-         axios.post("/api/character", {character}).then(res => res.data)
+         ruta.post("/api/character", {character}).then(res => res.data)
  }
 };
