@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const ruta = axios.create("http://localhost:3000");
+const ruta = axios.create({baseURL: 'http://localhost:8000'});
 
 export default{
  characters: {

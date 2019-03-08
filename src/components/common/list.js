@@ -11,7 +11,7 @@ const List = (props) => (
             </Table.Row>
         </Table.Header>
         <Table.Body>
-            {props.character.map(character =>(
+            {props.characters.map(character =>(
                 <Table.Row>
                     <Table.Cell>{character.name}</Table.Cell>
                     <Table.Cell>{character.descroption}</Table.Cell>
